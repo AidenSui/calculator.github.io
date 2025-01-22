@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔兽世界计算器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <div class="display-value">0</div>
+        </div>
+        <div class="buttons">
+            <button class="btn special" data-action="clear">C</button>
+            <button class="btn special" data-action="plus-minus">+/-</button>
+            <button class="btn special" data-action="percent">%</button>
+            <button class="btn operator" data-action="divide">÷</button>
+
+            <button class="btn number">7</button>
+            <button class="btn number">8</button>
+            <button class="btn number">9</button>
+            <button class="btn operator" data-action="multiply">×</button>
+
+            <button class="btn number">4</button>
+            <button class="btn number">5</button>
+            <button class="btn number">6</button>
+            <button class="btn operator" data-action="subtract">-</button>
+
+            <button class="btn number">1</button>
+            <button class="btn number">2</button>
+            <button class="btn number">3</button>
+            <button class="btn operator" data-action="add">+</button>
+
+            <button class="btn number zero">0</button>
+            <button class="btn" data-action="decimal">.</button>
+            <button class="btn operator" data-action="equals">=</button>
+        </div>
+    </div>
+    
+    <!-- 添加希尔瓦娜斯弹出层 -->
+    <div class="sylvanas-popup" id="sylvanasPopup">
+        <img src="https://img.moegirl.org.cn/common/6/65/Sylvanas_Windrunne.jpg" alt="Sylvanas">
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 

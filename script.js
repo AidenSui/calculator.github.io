@@ -4,6 +4,9 @@ class Calculator {
         this.previousValue = null;
         this.operation = null;
         this.newNumber = true;
+        this.MAX_DIGITS = 11;  // 最大显示位数
+        this.MAX_VALUE = 99999999999;  // 最大值
+        this.MIN_VALUE = -99999999999;  // 最小值
         
         this.display = document.querySelector('.display-value');
         this.bindEvents();
@@ -30,6 +33,9 @@ class Calculator {
             this.displayValue = number;
             this.newNumber = false;
         } else {
+            if (this.displayValue.replace('.', '').length >= this.MAX_DIGITS) {
+                return;
+            }
             this.displayValue = this.displayValue === '0' ? 
                 number : this.displayValue + number;
         }
@@ -78,6 +84,12 @@ class Calculator {
         const current = parseFloat(this.displayValue);
         let result;
 
+        if (this.operation === 'divide' && current === 0) {
+            this.displayValue = 'Error';
+            this.newNumber = true;
+            return;
+        }
+
         switch (this.operation) {
             case 'add':
                 result = prev + current;
@@ -94,6 +106,10 @@ class Calculator {
         }
 
         this.displayValue = this.formatResult(result);
+        if (this.displayValue === 'Error') {
+            this.previousValue = null;
+            this.operation = null;
+        }
         this.newNumber = true;
     }
 
@@ -119,7 +135,27 @@ class Calculator {
     }
 
     formatResult(number) {
-        return number.toString().slice(0, 12);
+        if (number > this.MAX_VALUE) {
+            return 'Error';
+        }
+        if (number < this.MIN_VALUE) {
+            return 'Error';
+        }
+        
+        if (number.toString().includes('.')) {
+            const [integer, decimal] = number.toString().split('.');
+            if (integer.length > this.MAX_DIGITS) {
+                return 'Error';
+            }
+            const maxDecimalPlaces = Math.max(0, this.MAX_DIGITS - integer.length - 1);
+            return Number(number).toFixed(Math.min(decimal.length, maxDecimalPlaces));
+        }
+        
+        if (number.toString().length > this.MAX_DIGITS) {
+            return 'Error';
+        }
+        
+        return number.toString();
     }
 
     updateDisplay() {
